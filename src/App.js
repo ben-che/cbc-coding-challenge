@@ -1,28 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux';
+import { getWeather } from './actions/getWeatherAction';
 import './App.css';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+	componentDidMount() {
+		this.getCoordinates()
+			.then((res) => {
+				this.props.getWeather(res.coords.latitude, res.coords.longitude);
+			})
+			.catch((e) => console.log(e));
+	}
+
+	getCoordinates() {
+		return new Promise(function(resolve, reject) {
+			navigator.geolocation.getCurrentPosition(resolve, reject);
+		});
+	}
+
+	render() {
+		console.log(this.props);
+		return <div className="App">Hello</div>;
+	}
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+	weatherInfo: state.getWeather.weatherInfo
+});
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getWeather: (lat, lon) => {
+			dispatch(getWeather(lat, lon));
+		}
+	};
+};
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(App);
