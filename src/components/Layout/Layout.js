@@ -129,7 +129,10 @@ class Layout extends Component {
 				<p className="weather-value">
 					{this.props.weatherInfo.weather._attributes.value}
 				</p>
-
+				<p className="last-updated-value">
+					Updated: {this.props.weatherInfo.lastupdate._attributes.value}{' '}
+					UTC
+				</p>
 				<div className="temperature-container">
 					<p className="side-temperature" undertext="low">
 						{this.renderLowTemperature()}
@@ -143,6 +146,35 @@ class Layout extends Component {
 					<p className="side-temperature" undertext="high">
 						{this.renderHighTemperature()}
 					</p>
+				</div>
+				<div className="info-container">
+					<div className="info-row">
+						<p>Wind:</p>
+						<p>
+							{this.props.weatherInfo.wind.speed._attributes.value}{' '}
+							miles/s{' '}
+							{this.props.weatherInfo.wind.direction._attributes.code}
+						</p>
+					</div>
+					<div className="info-row">
+						<p>Humidity:</p>
+						<p>{this.props.weatherInfo.humidity._attributes.value}%</p>
+					</div>
+					<div className="info-row">
+						<p>Pressure:</p>
+						<p>
+							{this.props.weatherInfo.pressure._attributes.value}
+							{this.props.weatherInfo.pressure._attributes.unit}
+						</p>
+					</div>
+					<div className="info-row">
+						<p>Sunrise:</p>
+						<p>{this.props.weatherInfo.city.sun._attributes.rise} UTC</p>
+					</div>
+					<div className="info-row">
+						<p>Sunset:</p>
+						<p>{this.props.weatherInfo.city.sun._attributes.set} UTC</p>
+					</div>
 				</div>
 			</div>
 		);
