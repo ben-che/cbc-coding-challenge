@@ -3,9 +3,21 @@
 2. Navigate to the root project directory and `npm install`
 3. `npm start` to run the project on `localhost: 3000`
 
-OR 
+### How does the network request work?
+Initially, I wanted to use the Geolocation API to get the user coordinates, but due to a combination of browser support,
+user permissions and unreliable resolution times, I decided to use the user's IP address instead. This came with a tradeoff;
+I originally wanted to host the project online so you wouldn't have to clone the repo, but the majority of free, accurate ip apis are only available through http protocol, and hosting solutions only allow https requests. 
 
-1. just navigate to this link & allow location access: https://ben-cbc-challenge.netlify.com/
+I use the user's ip to get their coordinates, feed that into the weather api through a promise, then convert the XML into JSON and save the weather information that is returned into redux's store. 
+
+Then, when the change propagates to the App component, it will render the weather UI as opposed to the loading UI based on 
+whether or not weather information exists within props. I also give the Layout component access to the `getWeather` function
+through `mapDispatchToProps`, and assign it to an `onClick` listener on the refresh button - allowing users to click the
+refresh button and update their weather information.
+
+### Potential points of failure
+Because this project relies on two different APIs - if either get rate limited, modified or the user is behind a VPN or proxy, 
+the information will be inaccurate or will not appear at all. Furthermore, users must allow http requests as opposed to the traditional https.
 
 ### Screenshots:
 Load State:
