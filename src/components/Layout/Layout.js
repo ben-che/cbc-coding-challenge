@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getWeather } from '../../actions/getWeatherAction';
 import './Layout.css';
 import snow from './assets/snow.jpeg';
 import rain from './assets/rain.jpeg';
@@ -118,7 +119,6 @@ class Layout extends Component {
 	}
 
 	render() {
-		console.log(this.props.weatherInfo);
 		return (
 			<div className="layout-container">
 				{this.renderBackground()}
@@ -130,8 +130,8 @@ class Layout extends Component {
 					{this.props.weatherInfo.weather._attributes.value}
 				</p>
 				<p className="last-updated-value">
-					Updated: {this.props.weatherInfo.lastupdate._attributes.value}{' '}
-					UTC
+					Server updated:{' '}
+					{this.props.weatherInfo.lastupdate._attributes.value} UTC
 				</p>
 				<div className="temperature-container">
 					<p className="side-temperature" undertext="low">
@@ -148,6 +148,15 @@ class Layout extends Component {
 					</p>
 				</div>
 				<div className="info-container">
+					<div
+						className="reload-button"
+						onClick={() => {
+							this.props.getWeather(
+								this.props.weatherInfo.city.coord._attributes.lat,
+								this.props.weatherInfo.city.coord._attributes.lon
+							);
+						}}
+					/>
 					<div className="info-row">
 						<p>Wind:</p>
 						<p>
@@ -175,6 +184,10 @@ class Layout extends Component {
 						<p>Sunset:</p>
 						<p>{this.props.weatherInfo.city.sun._attributes.set} UTC</p>
 					</div>
+					<div className="info-row">
+						<p>Locally updated at:</p>
+						<p>{new Date().toLocaleTimeString()}</p>
+					</div>
 				</div>
 			</div>
 		);
@@ -185,7 +198,15 @@ const mapStateToProps = (state) => ({
 	weatherInfo: state.getWeather.weatherInfo
 });
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getWeather: (lat, lon) => {
+			dispatch(getWeather(lat, lon));
+		}
+	};
+};
+
 export default connect(
 	mapStateToProps,
-	null
+	mapDispatchToProps
 )(Layout);

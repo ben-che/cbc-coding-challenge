@@ -21,7 +21,7 @@ class App extends Component {
 
 	render() {
 		console.log(this.props);
-		if (Object.keys(this.props.weatherInfo).length < 1) {
+		if (Object.keys(this.props.weatherInfo).length === 0) {
 			return <p>Loading, sit tight</p>;
 		}
 		return (
