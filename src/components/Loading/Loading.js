@@ -4,7 +4,7 @@ import './Loading.css';
 export default function Loading() {
 	return (
 		<div className="loading-container">
-			<div class="lds-spinner">
+			<div className="lds-spinner">
 				<div />
 				<div />
 				<div />
