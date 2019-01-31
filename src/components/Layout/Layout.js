@@ -25,12 +25,26 @@ class Layout extends Component {
 	renderLowTemperature() {
 		if (this.state.displayCelsius) {
 			return (
-				this.props.weatherInfo.temperature._attributes.value - 273.15
+				this.props.weatherInfo.temperature._attributes.min - 273.15
 			).toFixed(1);
 		}
 
 		return (
-			(this.props.weatherInfo.temperature._attributes.value - 273.15) *
+			(this.props.weatherInfo.temperature._attributes.min - 273.15) *
+				(9 / 5) +
+			32
+		).toFixed(1);
+	}
+
+	renderHighTemperature() {
+		if (this.state.displayCelsius) {
+			return (
+				this.props.weatherInfo.temperature._attributes.max - 273.15
+			).toFixed(1);
+		}
+
+		return (
+			(this.props.weatherInfo.temperature._attributes.max - 273.15) *
 				(9 / 5) +
 			32
 		).toFixed(1);
@@ -82,11 +96,17 @@ class Layout extends Component {
 					{this.props.weatherInfo.city.country._text}
 				</p>
 				<div className="temperature-container">
-					<p className="main-temperature">
+					<p className="side-temperature" undertext="low">
+						{this.renderLowTemperature()}
+					</p>
+					<p className="main-temperature" undertext="current">
 						{this.renderCurrentTemperature()}
 						<span className="temperature-control">
 							&#176; {this.renderTemperatureControl()}
 						</span>
+					</p>
+					<p className="side-temperature" undertext="high">
+						{this.renderHighTemperature()}
 					</p>
 				</div>
 			</div>
