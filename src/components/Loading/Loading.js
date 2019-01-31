@@ -19,10 +19,6 @@ export default function Loading() {
 				<div />
 			</div>
 			<p>Retrieving weather information...</p>
-			<p>
-				If you haven't, please allow the app to access your location -
-				otherwise I can't tell the weather!
-			</p>
 		</div>
 	);
 }

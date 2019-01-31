@@ -11,7 +11,6 @@ class App extends Component {
 		axios
 			.get('https://json.geoiplookup.io/')
 			.then((res) => {
-				console.log(res);
 				this.props.getWeather(res.data.latitude, res.data.longitude);
 			})
 			.catch((e) => console.log(e));
