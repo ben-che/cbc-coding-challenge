@@ -4,6 +4,10 @@
 3. `npm start` to run the project on `localhost: 3000` - works best on Chrome 5+ ; other browsers might have trouble using the Geolocation API
 4. Allow the app to use your location; this is needed to get localized temperature (I use the coordinates in the initial request)
 
+OR 
+
+1. just navigate to this link & allow location access: https://ben-cbc-challenge.netlify.com/
+
 ### Screenshots:
 Load State:
 
