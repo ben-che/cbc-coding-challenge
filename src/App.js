@@ -9,10 +9,10 @@ import './App.css';
 class App extends Component {
 	componentDidMount() {
 		axios
-			.get('http://ip-api.com/json/')
+			.get('https://json.geoiplookup.io/')
 			.then((res) => {
 				console.log(res);
-				this.props.getWeather(res.data.lat, res.data.lon);
+				this.props.getWeather(res.data.latitude, res.data.longitude);
 			})
 			.catch((e) => console.log(e));
 	}
