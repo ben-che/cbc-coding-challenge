@@ -8,6 +8,7 @@ export default function getWeather(state = defaultState, action) {
 	switch (action.type) {
 		case GET_WEATHER:
 			return { ...state, weatherInfo: action.payload };
+		default:
+			return state;
 	}
-	return state;
 }
