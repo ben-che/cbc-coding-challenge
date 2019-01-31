@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import { getWeather } from './actions/getWeatherAction';
 import Layout from './components/Layout';
 import Loading from './components/Loading';
@@ -7,17 +8,13 @@ import './App.css';
 
 class App extends Component {
 	componentDidMount() {
-		this.getCoordinates()
+		axios
+			.get('http://ip-api.com/json/')
 			.then((res) => {
-				this.props.getWeather(res.coords.latitude, res.coords.longitude);
+				console.log(res);
+				this.props.getWeather(res.data.lat, res.data.lon);
 			})
 			.catch((e) => console.log(e));
-	}
-
-	getCoordinates() {
-		return new Promise(function(resolve, reject) {
-			navigator.geolocation.getCurrentPosition(resolve, reject);
-		});
 	}
 
 	render() {
