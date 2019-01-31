@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getWeather } from './actions/getWeatherAction';
+import Layout from './components/Layout';
 import './App.css';
 
 class App extends Component {
@@ -20,7 +21,14 @@ class App extends Component {
 
 	render() {
 		console.log(this.props);
-		return <div className="App">Hello</div>;
+		if (Object.keys(this.props.weatherInfo).length < 1) {
+			return <p>Loading, sit tight</p>;
+		}
+		return (
+			<div className="main-container">
+				<Layout />
+			</div>
+		);
 	}
 }
 
