@@ -9,7 +9,9 @@ import './App.css';
 class App extends Component {
 	componentDidMount() {
 		axios
-			.get('https://json.geoiplookup.io/')
+			.get(
+				'http://api.ipstack.com/check?access_key=8c34c15ae5f8bf5a040ee7beb657e015'
+			)
 			.then((res) => {
 				this.props.getWeather(res.data.latitude, res.data.longitude);
 			})
