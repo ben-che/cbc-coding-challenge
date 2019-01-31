@@ -1,12 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import './Layout.css';
+import snow from './assets/snow.jpeg';
+import rain from './assets/rain.jpeg';
+import sun from './assets/sun.jpeg';
 
 class Layout extends Component {
 	state = {
 		displayCelsius: true
 	};
+
+	renderBackground() {
+		// 6xx = snow
+		if (this.props.weatherInfo.weather._attributes.number[0] === '6') {
+			return (
+				<div
+					className="layout-background"
+					style={{ backgroundImage: `url(${snow})` }}
+				/>
+			);
+		}
+		// 5xx = rain
+		else if (this.props.weatherInfo.weather._attributes.number[0] === '5') {
+			return (
+				<div
+					className="layout-background"
+					style={{ backgroundImage: `url(${rain})` }}
+				/>
+			);
+		}
+
+		return (
+			<div
+				className="layout-background"
+				style={{ backgroundImage: `url(${sun})` }}
+			/>
+		);
+	}
 
 	renderCurrentTemperature() {
 		if (this.state.displayCelsius) {
@@ -91,10 +121,15 @@ class Layout extends Component {
 		console.log(this.props.weatherInfo);
 		return (
 			<div className="layout-container">
+				{this.renderBackground()}
 				<p>
-					Weather in {this.props.weatherInfo.city._attributes.name},{' '}
+					{this.props.weatherInfo.city._attributes.name},{' '}
 					{this.props.weatherInfo.city.country._text}
 				</p>
+				<p className="weather-value">
+					{this.props.weatherInfo.weather._attributes.value}
+				</p>
+
 				<div className="temperature-container">
 					<p className="side-temperature" undertext="low">
 						{this.renderLowTemperature()}

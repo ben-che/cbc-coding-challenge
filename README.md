@@ -11,3 +11,4 @@
 - Load state added
 - Now with a prettier UI
 - Switch between celsius and farenheit
+- Background changes between sun / rain / snow; images are from Unsplash
