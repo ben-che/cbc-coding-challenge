@@ -32,6 +32,9 @@ class App extends Component {
 		return (
 			<div className="main-container">
 				<Layout />
+				<a className="website-link" href="https://benche.netlify.com">
+					Made by Ben Che &rarr;
+				</a>
 			</div>
 		);
 	}
